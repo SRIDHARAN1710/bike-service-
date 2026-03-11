@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}Check Service - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 500px; padding: 40px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 25px;">Service Check</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Bike Model</label>
+        <input type="text" name="model" placeholder="e.g. Yamaha MT-15" required>
+
+        <label>Total Kilometers (KM)</label>
+        <input type="number" name="km" placeholder="e.g. 5000" required>
+
+        <label>Last Service KM</label>
+        <input type="number" name="lastService" placeholder="e.g. 2000" required>
+
+        <label>Phone Number/email</label>
+        <input type="text" name="phone" placeholder="Mobile number for SMS" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="Email for notifications" required>
+
+        <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Check Status</button>
+    </form>
+
+    {% if success %}
+    <div class="alert success" style="margin-top: 20px;">
+        ✔ Service record saved! A confirmation email has been sent to you.
+        {% if alert_msg %}
+        <br><strong>{{ alert_msg }}</strong>
+        {% else %}
+        <br>Check your email/SMS for details.
+        {% endif %}
+    </div>
+
+    <!-- ✅ SERVICE CENTRE CARD -->
+    <div style="margin-top:20px; background:rgba(255,255,255,0.07);
+                border:1px solid rgba(255,255,255,0.15); border-radius:12px;
+                padding:20px 24px; text-align:center;">
+        <h3 style="margin:0 0 8px; font-size:16px;">🔧 {{ service_centre_name }}</h3>
+        <p style="margin:4px 0; font-size:13px; opacity:.8;">
+            📍 {{ service_centre_address }}
+        </p>
+        <p style="margin:4px 0 16px; font-size:13px; opacity:.8;">
+            📞 {{ service_centre_phone }}
+        </p>
+        <a href="{{ service_centre_maps }}" target="_blank" style="display:inline-block; margin:4px 6px; padding:10px 20px;
+                  background:#4f8ef7; color:#fff; border-radius:6px;
+                  text-decoration:none; font-weight:bold; font-size:13px;">
+            📌 Get Directions
+        </a>
+        <a href="{{ contact_link }}" target="_blank" style="display:inline-block; margin:4px 6px; padding:10px 20px;
+                  background:#1a1a2e; color:#fff; border-radius:6px;
+                  text-decoration:none; font-weight:bold; font-size:13px;">
+            🌐 Contact Us
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

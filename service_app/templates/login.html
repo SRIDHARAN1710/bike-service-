@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 400px; padding: 40px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Member Login</h2>
+
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password" required>
+
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Login</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="color: #ddd;">New user? <a href="{% url 'register' %}" style="color: var(--primary);">Register
+                here</a></p>
+    </div>
+</div>
+{% endblock %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url("https://wallpapercave.com/wp/wc1757389.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .login-container {
+        width: 350px;
+        padding: 25px;
+        margin: 100px auto;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        color: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 15px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        width: 100%;
+        background: #ffcc00;
+        color: black;
+        padding: 12px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #e6b800;
+    }
+
+    .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    .alert.error {
+        background: #ff4d4d;
+        color: white;
+    }
+
+    .alert.success {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .register-link {
+        text-align: center;
+        margin-top: 10px;
+        color: #ffcc00;
+    }
+
+    .register-link a {
+        color: #ffcc00;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .register-link a:hover {
+        color: #e6b800;
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="login-container">
+        <h2>Bike Service Login</h2>
+
+        {% if messages %}
+        <div id="alertBox">
+            {% for m in messages %}
+            <div class="alert {{ m.tags }}">{{ m }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <label>Username:</label>
+            <input type="text" name="username" id="username" placeholder="Enter username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" id="password" placeholder="Enter password" required>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="register-link">
+            New user? <a href="{% url 'register' %}">Register here</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

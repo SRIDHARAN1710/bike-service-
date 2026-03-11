@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Statistics - Bike Service{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 800px; padding: 40px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Service Analysis</h2>
+
+    <div style="display: flex; justify-content: space-around; margin-bottom: 40px;">
+        <div style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin-bottom: 5px;">{{ total_services }}</h3>
+            <p style="color: #ccc;">Total Services</p>
+        </div>
+        <div style="text-align: center;">
+            <h3 style="font-size: 2.5rem; margin-bottom: 5px;">{{ total_km }}</h3>
+            <p style="color: #ccc;">Total Kilometers</p>
+        </div>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px;">
+        <canvas id="serviceChart"></canvas>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('serviceChart').getContext('2d');
+    const chartData = {
+        labels: {{ chart_labels| safe }},
+    datasets: [{
+        label: 'Services per Model',
+        data: {{ chart_data| safe }},
+        backgroundColor: [
+        'rgba(255, 204, 0, 0.7)',
+        'rgba(54, 162, 235, 0.7)',
+        'rgba(255, 99, 132, 0.7)',
+        'rgba(75, 192, 192, 0.7)',
+        'rgba(153, 102, 255, 0.7)',
+        'rgba(255, 159, 64, 0.7)'
+    ],
+        borderColor: [
+        'rgba(255, 204, 0, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ],
+        borderWidth: 1
+        }]
+    };
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: 'white' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                },
+                x: {
+                    ticks: { color: 'white' },
+                    grid: { color: 'rgba(255,255,255,0.1)' }
+                }
+            },
+            plugins: {
+                legend: { labels: { color: 'white' } }
+            }
+        }
+    });
+</script>
+{% endblock %}

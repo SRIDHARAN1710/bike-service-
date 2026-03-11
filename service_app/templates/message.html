@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 600px; padding: 40px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 20px;">📩 Messages Received</h2>
+
+    <div id="messagesContainer" style="display: flex; flex-direction: column; gap: 15px;">
+        <!-- JS will populate -->
+    </div>
+</div>
+
+<script>
+    function loadMessages() {
+        const container = document.getElementById('messagesContainer');
+        container.innerHTML = '';
+
+        let messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+        if (messages.length === 0) {
+            container.innerHTML = "<p style='text-align:center; color: #bbb;'>No messages yet.</p>";
+            return;
+        }
+
+        messages.forEach((msg, index) => {
+            const div = document.createElement('div');
+            div.style.background = "rgba(255,255,255,0.1)";
+            div.style.padding = "15px";
+            div.style.borderRadius = "10px";
+            div.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <span style="font-weight:bold; color:var(--primary);">${msg.name}</span>
+                <span style="font-size:0.8rem; color:#aaa;">${msg.time}</span>
+            </div>
+            <p style="font-size:0.9rem; color:#ddd; margin-bottom:5px;">${msg.email}</p>
+            <p style="color:#fff;">${msg.message}</p>
+        `;
+            container.appendChild(div);
+        });
+    }
+    loadMessages();
+</script>
+{% endblock %}

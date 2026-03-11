@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}My Service History{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 800px; padding: 40px; margin: auto;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2>Service History</h2>
+        <a href="{% url 'service' %}" class="btn" style="padding: 8px 20px; font-size: 12px;">+ New Service</a>
+    </div>
+
+    {% if services %}
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+        {% for service in services %}
+        <div class="glass-panel"
+            style="padding: 20px; background: rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 5px;">{{ service.model }}</h3>
+                <p style="font-size: 0.9rem; color: #ccc;">
+                    Last Service: <strong>{{ service.last_service_km }} km</strong> |
+                    Current: <strong>{{ service.total_km }} km</strong>
+                </p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">
+                    Date: {{ service.created_at|date:"M d, Y h:i A" }}
+                </p>
+            </div>
+            <div style="text-align: right;">
+                {% if service.total_km|add:"-2500" >= service.last_service_km %}
+                <span style="color: var(--danger); font-weight: bold;">⚠ Service Due</span>
+                {% else %}
+                <span style="color: var(--success); font-weight: bold;">✔ Healthy</span>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 40px;">
+        <p style="font-size: 1.2rem; color: #bbb;">No service records found.</p>
+        <a href="{% url 'service' %}" style="color: var(--primary); margin-top: 10px; display: inline-block;">Check your
+            first service now</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

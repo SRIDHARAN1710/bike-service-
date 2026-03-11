@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 800px; padding: 50px; margin: auto; text-align: center;">
+    <h2 style="font-size: 2.5rem; margin-bottom: 30px;">About Us</h2>
+
+    <p style="font-size: 1.1rem; line-height: 1.8; color: #ddd; margin-bottom: 30px; text-align: justify;">
+        The <strong>Bike Service Alert System</strong> is designed to make motorcycle maintenance easier,
+        smarter, and more reliable. Our goal is to provide a digital solution that keeps
+        riders aware of upcoming service schedules, repairs, and safety checks—ensuring
+        your bike stays in perfect condition.
+    </p>
+
+    <p style="font-size: 1.1rem; line-height: 1.8; color: #ddd; margin-bottom: 40px; text-align: justify;">
+        This system includes features such as <strong>intelligent service alerts</strong>, <strong>maintenance
+            logs</strong>,
+        and <strong>data analysis tools</strong> for both mechanics and riders. We bring technology and convenience
+        together to make every ride safer.
+    </p>
+
+    <a href="{% url 'contact' %}" class="btn">Contact Support</a>
+</div>
+{% endblock %}

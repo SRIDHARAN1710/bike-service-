@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Get Started - Bike Service Alert{% endblock %}
+
+{% block content %}
+<div class="glass-panel"
+    style="text-align: center; padding: 60px; max-width: 800px; margin: auto; animation: fadeIn 1s ease-out;">
+    <h1 style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;">Welcome to Bike Service Alert</h1>
+    <p style="font-size: 1.2rem; color: #eee; margin-bottom: 40px;">
+        Stay on top of your bike maintenance! Get reminders, submit service requests, and track your bike's history all
+        in one place.
+    </p>
+
+    <div class="buttons">
+        {% if user.is_authenticated %}
+        <a href="{% url 'service' %}" class="btn" style="margin: 10px;">Service Form</a>
+        <a href="{% url 'history' %}" class="btn"
+            style="margin: 10px; background: transparent; border: 2px solid var(--primary); color: white;">View
+            History</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="btn" style="margin: 10px;">Login</a>
+        <a href="{% url 'register' %}" class="btn"
+            style="margin: 10px; background: transparent; border: 2px solid var(--primary); color: white;">Register</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

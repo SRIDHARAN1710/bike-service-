@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Bike Service Alert System - Home{% endblock %}
+
+{% block content %}
+<section class="glass-panel"
+    style="text-align: center; padding: 60px; max-width: 900px; margin: auto; animation: fadeIn 1s ease-out;">
+    <h1 style="font-size: 3.5rem; color: var(--primary); margin-bottom: 20px;">Keep Your Bike Running Smoothly</h1>
+    <p style="font-size: 1.3rem; color: #eee; margin-bottom: 40px; line-height: 1.6;">
+        Manage service reminders, track maintenance schedules, and keep your bike in top condition.
+        <br><strong>Fast, easy, and reliable — your safety matters!</strong>
+    </p>
+
+    <div class="buttons">
+        {% if user.is_authenticated %}
+        <a href="{% url 'service' %}" class="btn" style="margin: 10px;">Check Service Status</a>
+        <a href="{% url 'history' %}" class="btn"
+            style="background: transparent; border: 2px solid var(--primary); color: white; margin: 10px;">View
+            History</a>
+        {% else %}
+        <a href="{% url 'register' %}" class="btn" style="margin: 10px;">Get Started</a>
+        <a href="{% url 'login' %}" class="btn"
+            style="background: transparent; border: 2px solid var(--primary); color: white; margin: 10px;">Login</a>
+        {% endif %}
+    </div>
+</section>
+
+<div style="display: flex; justify-content: center; gap: 30px; margin-top: 50px; flex-wrap: wrap;">
+    <div class="glass-panel" style="padding: 30px; width: 300px; text-align: center;">
+        <h3 style="color: var(--primary); margin-bottom: 10px;">Smart Alerts</h3>
+        <p>Get notified via Email & SMS when your service is due.</p>
+    </div>
+    <div class="glass-panel" style="padding: 30px; width: 300px; text-align: center;">
+        <h3 style="color: var(--primary); margin-bottom: 10px;">Service History</h3>
+        <p>Keep a permanent digital log of all your bike maintenance.</p>
+    </div>
+    <div class="glass-panel" style="padding: 30px; width: 300px; text-align: center;">
+        <h3 style="color: var(--primary); margin-bottom: 10px;">Analysis</h3>
+        <p>Track total kilometers run and service frequency.</p>
+    </div>
+</div>
+{% endblock %}

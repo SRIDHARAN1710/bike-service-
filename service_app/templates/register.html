@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 500px; padding: 40px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 30px;">Create Account</h2>
+
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+
+        <label>Full Name</label>
+        <input type="text" name="fullname" placeholder="John Doe" required>
+
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="john@example.com" required>
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Choose a username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Create a password" required>
+
+        <label>Confirm Password</label>
+        <input type="password" name="cpassword" placeholder="Repeat password" required>
+
+        <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Register</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <p style="color: #ddd;">Already have an account? <a href="{% url 'login' %}"
+                style="color: var(--primary);">Login here</a></p>
+    </div>
+</div>
+{% endblock %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: url("https://wallpapercave.com/wp/wc1757389.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .register-container {
+        width: 400px;
+        padding: 30px;
+        margin: 80px auto;
+        background: rgba(0, 0, 0, 0.75);
+        border-radius: 10px;
+        color: white;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #ffcc00;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0 15px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        width: 100%;
+        background: #ffcc00;
+        color: black;
+        padding: 12px;
+        border: none;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #e6b800;
+    }
+
+    .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    .alert.error {
+        background: #ff4d4d;
+        color: white;
+    }
+
+    .alert.success {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .login-link {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 16px;
+        color: #ffcc00;
+    }
+
+    .login-link a {
+        color: #ffcc00;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .login-link a:hover {
+        color: #e6b800;
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="register-container">
+        <h2>New User Registration</h2>
+
+        {% if messages %}
+        <div id="alertBox">
+            {% for m in messages %}
+            <div class="alert {{ m.tags }}">{{ m }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'register' %}">
+            {% csrf_token %}
+
+            <label>Full Name:</label>
+            <input type="text" name="fullname" id="fullname" placeholder="Enter full name" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" id="email" placeholder="Enter email" required>
+
+            <label>Username:</label>
+            <input type="text" name="username" id="username" placeholder="Choose a username" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" id="password" placeholder="Choose a password" required>
+
+            <label>Confirm Password:</label>
+            <input type="password" name="cpassword" id="cpassword" placeholder="Confirm password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <div class="login-link">
+            Already registered? <a href="{% url 'login' %}">Login here</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

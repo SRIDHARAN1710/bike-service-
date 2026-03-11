@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard - Bike Service{% endblock %}
+
+{% block content %}
+<div class="glass-panel" style="width: 100%; max-width: 1000px; padding: 30px; margin: auto;">
+    <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary);">Admin Dashboard</h2>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; color: white;">
+            <thead>
+                <tr style="background: rgba(0,0,0,0.5); text-align: left;">
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">User</th>
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">Bike Model</th>
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">Total KM</th>
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">Last Service</th>
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">Date</th>
+                    <th style="padding: 15px; border-bottom: 1px solid #555;">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for service in services %}
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <td style="padding: 15px;">{{ service.user.username }}</td>
+                    <td style="padding: 15px;">{{ service.model }}</td>
+                    <td style="padding: 15px;">{{ service.total_km }}</td>
+                    <td style="padding: 15px;">{{ service.last_service_km }}</td>
+                    <td style="padding: 15px;">{{ service.created_at|date:"Y-m-d" }}</td>
+                    <td style="padding: 15px;">
+                        {% if service.total_km|add:"-2500" >= service.last_service_km %}
+                        <span style="color: var(--danger); font-weight: bold;">Due</span>
+                        {% else %}
+                        <span style="color: var(--success);">OK</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="padding: 30px; text-align: center; color: #bbb;">No service records found.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
