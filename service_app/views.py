@@ -68,8 +68,8 @@ from django.conf import settings
 # Service Centre details — update these to match your actual centre
 # -----------------------------------------------------------------
 SERVICE_CENTRE_NAME    = "ABC Bike Service Centre"
-SERVICE_CENTRE_ADDRESS = "123 Service Road, Coimbatore, Tamil Nadu, India"
-SERVICE_CENTRE_MAPS    = "https://maps.google.com/?q=Coimbatore+Bike+Service+Centre"
+SERVICE_CENTRE_ADDRESS = "123 Service Road, Trichy, Tamil Nadu, India"
+SERVICE_CENTRE_MAPS    = "https://maps.google.com/?q=Trichy+Bike+Service+Centre"
 SERVICE_CENTRE_PHONE   = "+91 98765 43210"
 # The in-app contact page (relative — we build the full URL in the view)
 SERVICE_CENTRE_PAGE    = "/contact/"
