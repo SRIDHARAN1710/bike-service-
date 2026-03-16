@@ -2,7 +2,7 @@
 # exit on error
 set -o errexit
 
-pip install -r bike_service_backend/requirements.txt
+pip install -r requirements.txt
 
 # Collect static files
 python manage.py collectstatic --no-input
